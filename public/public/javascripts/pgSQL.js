@@ -3,7 +3,7 @@
  */
 //var conString = "pi://postgres:ruben10@localhost:3000/ChelasLxDB",
 var conString,//= "pi://postgres:qwerty@localhost:5432/postgres", //change by the prop file
-    confFile= require('../configDB'), //you must create a config file like that and put it at git ignore
+    confFile= require('./configDB'), //you must create a config file like that and put it at git ignore
     pg = require('pg'),
     encrypt = require('./encrypt');
     //errors = require('./errors');

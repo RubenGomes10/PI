@@ -1,0 +1,6 @@
+if(advertisement !== undefined)
+   block insertComment
+       div(id="insertComment", class="blog-header")
+           form(method='post', action= '/adds/'+ advertisement.id +'/comment')
+               textarea.form-control(type="text", rows='4', placeholder="Comentário", name='commentDescription')
+               button.btn-lg.btn-success(type="submit") Comentar
