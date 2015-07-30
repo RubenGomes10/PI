@@ -1,0 +1,37 @@
+//Created by Ruben Gomes on 26/07/2015.
+extends ../layout
+
+block links
+   link(rel='stylesheet', href='/stylesheets/signin.css')
+
+block content
+   div(class="jumbotron")
+      div(class="container register")
+         form(class="form-signin", method='post', action='/register')
+            h2(class="form-signin-heading") Registo
+            if(message != undefined && message.length>0)
+               if(!success)
+                  div(class="alert alert-success")
+                     span(class="glyphicon-glyphicon-ok-circle", aria-hidden="true")= message
+               else
+                  div(class="alert alert-danger")
+                     span(class="glyphicon-glyphicon-remove-circle", aria-hidden="true")= message
+            input(id="firstname", class="form-control", type="text", placeholder="Nome", autofocus="true", name="firstname", required="true")
+            input(id="lastname", class="form-control", type="text", placeholder="Apelido", name='lastname',required='true')
+            input(id="email", class="form-control", type="email", placeholder="Email", name='email', required='true')
+            input(id="username",class="form-control", type="text", placeholder="Username", name='username', required='true')
+            input(id="password", class="form-control", type="password", placeholder="Password", name='password', required='true')
+            input(id="password2", class="form-control", type="password", placeholder="Confirmar Password", name='password2', required='true')
+            select.form-control(type="text" name='question')
+               option Qual é o nome do teu animal de estimação?
+               option Qual é a tua equipa favorita?
+               option Qual é o teu super-herói?
+               option Qual é a disciplina que mais gostas?
+               option Qual é o modelo da tua primeira motherboard?
+               option Qual o Maior clube do Mundo?
+               option Quantas vezes repetiste essa Cadeira?
+               option Quantos creditos tens no ISEL?
+               option Qual o Maior clube do Mundo?
+               option Quantas vezes repetiste essa Cadeira?
+            input#response.form-control(type="text", placeholder="Resposta", name='response')
+            button.btn.btn-lg.btn-primary.btn-block(type="submit") Registar
