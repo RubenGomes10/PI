@@ -1,0 +1,56 @@
+//
+   Created by Rúben Gomes on 27-07-2015.
+extends ../layout
+
+
+
+block changeAdvertisement
+    include changeAdvertisement
+
+block updateDeleteButtons
+    include ../buttons/updateDeleteButtons
+block insertComment
+    include ../comments/comment
+block buttons
+    include ../buttons/buttons
+
+
+block content
+   div(class="jumbotron")
+      if(updateAdd)
+       block changeAdvertisement
+      div(class="container")
+          div(class="blog-post", id= advertisement.id)
+              div(class="row pull-right text-right")
+                  block updateDeleteButtons
+              div(id="title", class="row")
+              h2= advertisement.title
+              div(class="row")
+                  div(class="col-lg-8")
+                      div(class="media")
+                          div(class="media-left media-middle")
+                              img(class="img-responsive", src= advertisement.pictures, width='800', height='600', alt='Responsive Image')
+              div(class='row')
+                  p(class="blog-post-description")= advertisement.description
+              p(class="blog-post-meta") Create at #{advertisement.publishdate} as #{advertisement.publishtime.substring(0,8)}
+              if(advertisement.city && advertisement.country)
+                  p #{advertisement.city}, #{advertisement.country}
+              p Author - #{advertisement.username}
+          block buttons
+          if(advertisement.comments)
+              div(id="comments",class="collapse")
+                  each comment in advertisement.comments
+                      div(class="row col-md-12")
+                          div(class="row panel-default col-md-6")
+                              div(class="panel-heading")
+                                  div(class="post btn-group", role="group")
+                                      button(class="btn btn-defaul")
+                                          span(class="glyphicon glyphicon-user", aria-hidden='true')
+                                      button(class="btn btn-default")
+                                          span(class="usercomment")= comment.usernameuser
+                              div(class="panel-body")
+                                  text= comment.description
+          block insertComment
+          script(src='/javascripts/jquery/jqbuttons.js')
+
+
