@@ -2,7 +2,7 @@
   "name": "chelas_clx",
   "version": "0.1.0",
   "private": false,
-  "description": "App to deploy",
+  "description": "app to deploy",
   "scripts": {
     "start": "node app"
   },
