@@ -1,8 +1,0 @@
-if(authenticated)
-    span#updateAndDelete
-        if(advertisement.username == user.username)
-            button#updateButton.btn.btn-default(type='button')
-                a.btn.glyphicon.glyphicon-cog(href='/adds/'+advertisement.id+'/update', role="button")
-            button#removeButton.btn.btn-default(type='button')
-                a.btn.glyphicon.glyphicon-remove(href='/adds/'+advertisement.id+'/delete',role='button')
-
