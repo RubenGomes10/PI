@@ -12,7 +12,7 @@ var conString, //= "pi://postgres:ruben10@localhost:3000/ChelasLxDB",
 
 /* Connect to the dataBase to optain results*/
 module.exports.query = function(queryString,values,callback){
-    pg.connect(process.env.DATABASE_URL,function(err,client,done){
+    pg.connect(process.env.DATABASE_URL, function(err,client,done){
         if(err){ callback(err); return;}
         client.query(queryString,values,function(err,result){
             done();
