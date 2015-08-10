@@ -2,8 +2,8 @@
  * Created by Ruben Gomes on 26/07/2015.
  */
 var usersDB = require('../models/usersDB'),
-    encrypt = require('../public/javascripts/encrypt'),
-    pgSql   = require('../public/javascripts/pgSql'), // To access the database
+    encrypt = require('../models/encrypt'),
+    pgSql   = require('../models/pgSQL'), // To access the database
     errors  = require('../public/javascripts/errors');
 
 var usersController = {

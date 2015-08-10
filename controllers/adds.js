@@ -2,7 +2,7 @@
  * Created by Ruben Gomes on 26/07/2015.
  */
 
-var pgSql       = require('../public/javascripts/pgSql'), // To access the database
+var pgSql       = require('../models/pgSQL'), // To access the database
     errors      = require('../public/javascripts/errors'),
     geoip       = require('geoip-lite'),
     addsDB      = require('../models/advertisementsDB'),
