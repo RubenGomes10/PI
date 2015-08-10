@@ -1,8 +1,8 @@
 /**
  * Created by Ruben Gomes on 23/07/2015.
  */
-var conString, //= "pi://postgres:ruben10@localhost:3000/ChelasLxDB",
-	//var conString= "pi://postgres:qwerty@localhost:5432/postgres", //change by the prop file
+//var conString = "pi://postgres:ruben10@localhost:3000/ChelasLxDB",
+var conString,//= "pi://postgres:qwerty@localhost:5432/postgres", //change by the prop file
     confFile= require('../configDB'), //you must create a config file like that and put it at git ignore
     pg = require('pg'),
     encrypt = require('./encrypt');
@@ -12,7 +12,7 @@ var conString, //= "pi://postgres:ruben10@localhost:3000/ChelasLxDB",
 
 /* Connect to the dataBase to optain results*/
 module.exports.query = function(queryString,values,callback){
-    pg.connect(process.env.DATABASE_URL, function(err,client,done){
+    pg.connect(conString,function(err,client,done){
         if(err){ callback(err); return;}
         client.query(queryString,values,function(err,result){
             done();

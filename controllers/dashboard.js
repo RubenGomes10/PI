@@ -23,17 +23,11 @@ var dashboardController = {
                 'WHERE followedadvertisement.usernameuser =$1 ORDER BY changed DESC', [ req.user.username ], function(err, results) {
                 if(err)
                     return new errors.SqlError(err);
-                pgSql.query('DELETE ' +
-                    'FROM followedadvertisement ' +
-                    'USING advertisement ' +
-                    'WHERE advertisementid = id AND closed = true AND followedadvertisement.usernameuser = $1', [req.user.username], null);
-
-                pgSql.query('UPDATE followedadvertisement SET changed = false WHERE usernameuser = $1', [ req.user.username ], null );
-
                 for(var i = 0; i < results.rowCount; i++) {
                     results.rows[i].publishtime = results.rows[i].publishtime.substring(0, results.rows[i].publishtime.lastIndexOf(':'));
                     followedadds.push(results.rows[i]);
                 }
+                pgSql.query('UPDATE followedadvertisement SET changed = false WHERE usernameuser = $1', [ req.user.username ], null );
 
                 res.render('dashboard/dashboard',
                     {

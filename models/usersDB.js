@@ -1,5 +1,5 @@
 /**
- * Created by Rúben Gomes on 27-07-2015.
+ * Created by Rï¿½ben Gomes on 27-07-2015.
  */
 var pgSql  = require('../public/javascripts/pgSql'), // To access the database
     errors = require('../public/javascripts/errors');
@@ -14,15 +14,21 @@ var usersDB = {
         });
     },
     getUserByUserName: function(username,done) {
-        pgSql.select('_user', {username: username}, function (err, user) {
+        pgSql.select('_user', {username: username}, function (err, results) {
             if (err) return done(new errors.SqlError(err));
-            done(null, user);
+            if(results.rowCount === 0)
+                done(null,null);
+            else
+                done(null, results.rows.shift());
         })
     },
     getResponseFromUser: function(username,done){
         usersDB.getUserByUserName(username,function(err,user){
             if(err) return done(err);
-            done(null,user.response);
+            if(user === null)
+                done(null, null);
+            else
+                done(null,user.response);
         })
     },
     insertUser : function(username, password,email, firstname, lastname, question, response, done){
@@ -34,12 +40,17 @@ var usersDB = {
     getPasswordFromUser: function(username,done){
         usersDB.getUserByUserName(username,function(err,user){
             if(err) return done(new errors.SqlError(err));
-            done(null,user.password);
+            if(user === null)
+                done(null,null);
+            else
+                done(null,user.password);
         })
     },
     getEmailFromUser: function(username,done){
         usersDB.getUserByUserName(username,function(err,user){
             if(err) return done(new errors.SqlError(err));
+            if(user === null)
+                done(null,null);
             done(null,user.email);
         })
     }

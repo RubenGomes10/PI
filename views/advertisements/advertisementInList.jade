@@ -8,10 +8,10 @@ div(class="container table-bordered")
                 div(class="media-right media-middle pull-right")
                     img(class="img-responsive", src= advertisement.pictures, width='250',height='180', alt='Responsive Image')
     div(class="col-md-6 pull-left")
-        p Create at #{advertisement.publishdate} as #{advertisement.publishtime.substring(0,8)}
+        p Criada em #{advertisement.publishdate} às #{advertisement.publishtime.substring(0,8)}
         if(advertisement.city && advertisement.country)
             p #{advertisement.city}, #{advertisement.country}
-        p Author - #{advertisement.username}
-        p Description - #{advertisement.description}
+        p Autor - #{advertisement.username}
+        p Descrição - #{advertisement.description}
 
 

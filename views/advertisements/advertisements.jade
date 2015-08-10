@@ -11,10 +11,10 @@ block content
             div(class="row")
                 div(class="col-md-12")
                     h1(class="text-left no-margin-top")
-                        div(class="margin-center") ChelasLx
-                        p(class="hidden-xs margin-center") O melhor site para pesquisa e introducao dos teus anuncios!
+                        div(class="margin-center") Chelas-LX
+                        p(class="hidden-xs margin-center") O melhor site para pesquisa e introdução dos teus anúncios!
                     div(class="search")
-                        form(method='get', role='form', action="/",)
+                        form(method='get', role='form', action="/adds/page/1",)
                             div(class="row")
                                 div(class="col-md-4")
                                     input(class="form-control input-lg", type='text', placeholder='O que procura?', name='title')
@@ -34,7 +34,7 @@ block content
                             include advertisementInList
             div(class="container register")
                 form(class="form-signin", method='post', action='/adds',enctype="multipart/form-data")
-                    h2(class="form-signin-heading") Inserir um novo Anuncio.
+                    h2(class="form-signin-heading") Inserir um novo Anúncio.
                         if(failAdd != undefined && failAdd)
                             div.alert.alert-danger
                                 span.glyphicon.glyphicon-remove-circle(aria-hiden='true')= message
@@ -42,9 +42,9 @@ block content
                             div(class="alert alert-success")
                                 span(class="glyphicon-glyphicon-success-circle", aria-hiden="true")= message
                         input(class="form-control",type='text', placeholder='Titulo', name='title', maxlength='64', required='true')
-                        input(class="form-control", type="text", placeholder='Pais', name='country')
+                        input(class="form-control", type="text", placeholder='País', name='country')
                         p
-                        textarea.form-control(rows='4', placeholder='Descricao', name='description')
+                        textarea.form-control(rows='4', placeholder='Descrição', name='description')
                         br
                         input(class="form-control", type="file", name='userPhoto')
                         button.btn-lg.btn-primary.pull-right(type='submit') Inserir

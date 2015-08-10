@@ -1,13 +1,13 @@
-div.post.btn-group.pull-left(role='group')
-    button.btn.btn-primary
+div(class="post btn-group pull-left", role='group')
+    button(class="btn btn-primary")
         |  Seguimentos  
-        span#following.badge= advertisement.nFollows
-    button.btn.btn-default
-        span.glyphicon.glyphicon-envelope
+        span(id="following", class="badge")= advertisement.nFollows
+    button(class="btn btn-default")
+        span(class="glyphicon glyphicon-envelope")
         |  Comentarios   
-        span.badge= advertisement.nComments
-    button#comment.btn.btn-default(type="button", advertisementid= advertisement.id, collapsed="false", data-toggle="collapse", data-target="comments", aria-expanded="false", controls="comments")
-        span.glyphicon.glyphicon-chevron-down
+        span(class="badge")= advertisement.nComments
+    button(id="comment", class="btn btn-default", type="button", advertisementid= advertisement.id, collapsed="false", data-toggle="collapse", data-target="comments", aria-expanded="false", controls="comments")
+        span(class="glyphicon glyphicon-chevron-down")
 
 
 

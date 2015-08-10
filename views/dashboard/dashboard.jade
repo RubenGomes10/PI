@@ -4,7 +4,7 @@
 extends ../layout
 head
    block links
-      script(src='/javascripts/jquery/functions.js')
+      script(src='/javascripts/jquery/functionsDOM.js')
       script(src='/javascripts/jquery/jqbuttons.js')
 
 body
@@ -23,39 +23,40 @@ body
                     }
                 });
             }
-        div.container(text-align='center')
-            div.blog-header
-                h1.blog-title.text-center Dashboard
-            div.blog-main
+        div(class="container", text-align='center')
+            div(class="blog-header")
+                h1(class="blog-title text-center") Dashboard
+            div(class="blog-main")
         if(followedadds !== undefined && followedadds.length !== 0)
             each advertisement in followedadds
-                div.blog-post(id=advertisement.id)
-                    div.row
-                        span.col-xs-1
+                div(class="blog-post", id=advertisement.id)
+                    div(class="row")
+                        span(class="col-xs-1")
                         h2= advertisement.title
                         if(!advertisement.changed === true)
-                            span.col-xs-3.glyphicon.glyphicon-asterisk.orange
+                            span(class="col-xs-3 glyphicon glyphicon-asterisk orange")
                         else
-                            span.col-xs-1
+                            span(class="col-xs-1")
                     div(class="row")
-                    div(class="col-lg-8")
-                        div(class="media")
-                            div(class="media-left media-middle")
-                                img(class="img-responsive", src= advertisement.pictures, width='256', height='128', alt='Responsive Image')
+                        div(class="col-lg-8")
+                            div(class="media")
+                                div(class="media-left media-middle")
+                                    img(class="img-responsive", src= advertisement.pictures, width='256', height='128', alt='Responsive Image')
                     div(class='row')
-                        p(class="blog-post-description")= advertisement.description
+                        div(class="col-md-4")
+                            p(class="blog-post-description")= advertisement.description
                     p(class="blog-post-meta") Create at #{advertisement.publishdate} as #{advertisement.publishtime.substring(0,8)}
                     if(advertisement.city && advertisement.country)
                         p #{advertisement.city}, #{advertisement.country}
                     p Author - #{advertisement.username}
-                    div.post.btn-group(role='group')
-                        button#follow.btn.btn-primary(complaintid= advertisement.id, data-placement="top", data-toggle="tooltip", title="Já está a seguir!")
-                            span.glyphicon.glyphicon-bookmark
+                    div(class="post btn-group", role='group')
+                        button(id="follow", class="btn btn-primary", complaintid= advertisement.id, data-placement="top", data-toggle="tooltip", title="Já está a seguir!")
+                            span(class="glyphicon glyphicon-bookmark")
                             |  Seguir
-                            span#following.badge= advertisement.nfollows
-                        a.btn.btn-default(role="button")
-                            span.glyphicon.glyphicon-envelope
+                            span(id="following", class="badge")= advertisement.nfollows
+                        a(class="btn btn-default", role="button")
+                            span(class="glyphicon glyphicon-envelope")
                             |  Comentar
-                            span.badge= advertisement.ncomments
-                        button#comment.btn.btn-default(type="button", onclick="getAndAddCommentsToParent(this, " + advertisement.id + ");")
-                            span.glyphicon.glyphicon-chevron-down
+                            span(class="badge")= advertisement.ncomments
+                        button(id="comment", class="btn btn-default", type="button", onclick="getAndAddCommentsToParent(this, " + advertisement.id + ");")
+                            span(class="glyphicon glyphicon-chevron-down")

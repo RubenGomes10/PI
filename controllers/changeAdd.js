@@ -2,9 +2,9 @@
  * Created by Ruben Gomes on 26/07/2015.
  */
 
-var addsDB = require('../models/advertisementsDB'),
+var addsDB     = require('../models/advertisementsDB'),
     commentsDB = require('../models/commentsDB'),
-    errors = require('../public/javascripts/errors');
+    errors     = require('../public/javascripts/errors');
 
 var changeAddController = {
     getAdd: function(req,res){

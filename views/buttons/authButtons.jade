@@ -1,11 +1,11 @@
-div.post.btn-group(role='group')
-   button#follow.btn.btn-primary(advertisementid= advertisement.id, data-placement="top", data-toggle="tooltip", title="Já está a seguir!")
-      span.glyphicon.glyphicon-bookmark
+div(class="post btn-group",role='group')
+   button(id="follow",class="btn btn-primary", advertisementid= advertisement.id, data-placement="top", data-toggle="tooltip", title="Já está a seguir!")
+      span(class="glyphicon glyphicon-bookmark")
       |  Seguir
-      span#following.badge= advertisement.nFollows
-   a.btn.btn-default(role="button")
-      span.glyphicon.glyphicon-envelope
+      span(id="following", class="badge")= advertisement.nFollows
+   a(class="btn btn-default", role="button")
+      span(class="glyphicon glyphicon-envelope")
       |  Comentarios
-      span.badge= advertisement.nComments
-   button#comment.btn.btn-default(type="button", advertisementid= advertisement.id, collapsed="false", data-toggle="collapse", data-target="comments", aria-expanded="false", controls="comments")
-      span.glyphicon.glyphicon-chevron-down
+      span(class="badge")= advertisement.nComments
+   button(id="comment", class="btn btn-default", type="button", advertisementid= advertisement.id, collapsed="false", data-toggle="collapse", data-target="comments", aria-expanded="false", controls="comments")
+      span(class="glyphicon glyphicon-chevron-down")

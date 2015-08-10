@@ -4,16 +4,16 @@ div(class="container register")
    form(class="form-signin", method='post', action='/adds/'+advertisement.id+'/update', enctype="multipart/form-data")
       h2(class="form-signin-heading") Alterar Anúncio.
          if(failAdd != undefined && failAdd)
-            div.alert.alert-danger
-               span.glyphicon.glyphicon-remove-circle(aria-hiden='true')= message
+            div(class="alert alert-danger")
+               span(class="glyphicon glyphicon-remove-circle",aria-hiden='true')= message
          else
             div(class="alert alert-success")
                span(class="glyphicon-glyphicon-success-circle", aria-hiden="true")= message
-         input(class="form-control",type='text', placeholder='Título', name='title', maxlength='64', required='true')
+         input(class="form-control", type='text', placeholder='Título', name='title', maxlength='64', required='true')
          input(class="form-control", type="text", placeholder='País', name='country')
          p
-         textarea.form-control(rows='4', placeholder='Descrição', name='description')
+         textarea(class="form-control", rows='4', placeholder='Descrição', name='description')
          br
          input(class="form-control", type="file", name='userPhoto')
-         button.btn-lg.btn-primary.pull-right(type='submit') Actualizar
+         button(class="btn-lg btn-primary pull-left", type='submit') Actualizar
    script(src='/javascripts/jquery/jqbuttons.js')

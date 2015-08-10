@@ -28,31 +28,31 @@ html(lang='pt')
                     li
                       a(href='/adds', role="button")
                         i(class="glyphicon glyphicon-comment")
-                        b Advertisements
+                        b Anúncios
                     li
                       a(href="/about", role="button")
                         i(class="glyphicon glyphicon-info-sign")
-                        b About
+                        b Sobre
                   block session
                     if(!authenticated)
                       form(class="navbar-form navbar-right")
                         a(href="/login", role="button", class="btn btn-success")
-                          b Login
+                          b Entrar
                       form(class="navbar-form navbar-right")
                         a(href="/authentication", role="button", class="btn btn-primary")
-                          b Register
+                          b Registar
                     else
-                        form.navbar-form.navbar-right
-                            div.dropdown
-                                button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true", id="session-options")
+                        form(class="navbar-form navbar-right")
+                            div(class="dropdown")
+                                button(class="btn btn-default dropdown-toggle", type="button", data-toggle="dropdown", aria-expanded="true", id="session-options")
                                     b= user.username + '  '
-                                    span.caret
-                                ul.dropdown-menu(role="menu", aria-labelledby="session-options")
+                                    span(class="caret")
+                                ul(class="dropdown-menu", role="menu", aria-labelledby="session-options")
                                     li(role="presentation")
                                         a(href='/dashboard', role="menuitem", tabindex="-1")
-                                            span.badge= nNotifications
+                                            span(class="badge")= nNotifications
                                             |   Dashboard
-                                    li.divider(role="presentation")
+                                    li(class="divider", role="presentation")
                                     li(role="presentation")
                                         a(href='/logout', role="menuitem", tabindex="-1") Sair
         div(class="content")

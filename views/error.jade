@@ -1,18 +1,18 @@
 extends layout
 
 block content
-  div.jumbotron
-    div.container
-        div.col-md-12
-            div.error-template
+  div(class="jumbotron")
+    div(class="container")
+        div(class="col-md-12")
+            div(class="error-template")
                 h2
                     = message  
                     |  - (
                     = error.status
                     | )
-            div.error-details
-                h3 Lamentos mas não conseguimos encontrar a página!
-            div.error-actions
-                a.btn.btn-primary.btn-lg(href='/')
+            div(class="error-details")
+                h3 Página não encontrada!
+            div(class="error-actions")
+                a(class="btn btn-primary btn-lg", href='/')
                     | Voltar à página inicial  
-                    span.glyphicon.glyphicon-home
+                    span(class="glyphicon glyphicon-home")

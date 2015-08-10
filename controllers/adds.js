@@ -1,12 +1,13 @@
 /**
  * Created by Ruben Gomes on 26/07/2015.
  */
-var addsDB = require('../models/advertisementsDB');
-var followersDB = require('../models/followedAdvertisementDB');
-var commentsDB = require('../models/commentsDB');
-var pgSql  = require('../public/javascripts/pgSql'), // To access the database
-    errors = require('../public/javascripts/errors'),
-    geoip  = require('geoip-lite'),
+
+var pgSql       = require('../public/javascripts/pgSql'), // To access the database
+    errors      = require('../public/javascripts/errors'),
+    geoip       = require('geoip-lite'),
+    addsDB      = require('../models/advertisementsDB'),
+    followersDB = require('../models/followedAdvertisementDB'),
+    commentsDB  = require('../models/commentsDB'),
     MAX_ADVERTISEMENTS_PER_PAGE = 10;
 
 var addsController = {
@@ -27,52 +28,52 @@ var addsController = {
                 );
                 return;
             }
-            nPages = Math.ceil(results.rowCount / MAX_ADVERTISEMENTS_PER_PAGE);
-            if (currentPage > nPages) currentPage = nPages;
-            pgSql.query('SELECT * FROM advertisement ORDER BY publishdate DESC, publishtime DESC LIMIT $1 OFFSET $2',
-                [MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE],
-                function (err, results) {
-                    if (err) return new errors.SqlError(err);
-                    if (results.rowCount === 0) {
-                        res.render('advertisements/advertisements',
-                            {
-                                title: 'Advertisements', user: req.user, nPages: nPages, currentPage: currentPage,
-                                authenticated: isAuthenticated(req), nNotifications: req.nNotifications
-                            }
-                        );
-                        return;
-                    }
-                    addsDB.addDataToAdvertisement(results.rows, 0, function (err) {
+                resolveFilter(req.query,currentPage,function(query,values) {
+                    nPages = Math.ceil(results.rowCount / MAX_ADVERTISEMENTS_PER_PAGE);
+                    if (currentPage > nPages) currentPage = nPages;
+                    pgSql.query(query,values, function (err, results) {
                         if (err) return new errors.SqlError(err);
-                        addsDB.addCommentsToAdvertisement(results.rows, 0, function (err) {
-                            if (err) return new errors.SqlError(err);
+                        if (results.rowCount === 0) {
                             res.render('advertisements/advertisements',
                                 {
-                                    title: "Advertisements",
+                                    title: 'Advertisements',
                                     user: req.user,
-                                    advertisements: results.rows,
                                     nPages: nPages,
                                     currentPage: currentPage,
                                     authenticated: isAuthenticated(req),
                                     nNotifications: req.nNotifications
                                 }
-                            )
+                            );
+                            return;
+                        }
+                        addsDB.addDataToAdvertisement(results.rows, 0, function (err) {
+                            if (err) return new errors.SqlError(err);
+                            addsDB.addCommentsToAdvertisement(results.rows, 0, function (err) {
+                                if (err) return new errors.SqlError(err);
+                                res.render('advertisements/advertisements',
+                                    {
+                                        title: "Advertisements",
+                                        user: req.user,
+                                        advertisements: results.rows,
+                                        nPages: nPages,
+                                        currentPage: currentPage,
+                                        authenticated: isAuthenticated(req),
+                                        nNotifications: req.nNotifications
+                                    }
+                                )
+                            });
                         });
                     });
                 });
         });
-
-
     },
     getAdd: function(req,res){
         addsDB.getAddById(req.params.id,function(err,add){
             if(err) return new errors.SqlError(err);
-            console.log(add.rows);
             addsDB.addDataToAdvertisement(add.rows, 0, function (err) {
                 if (err) return new errors.SqlError(err);
                 addsDB.addCommentsToAdvertisement(add.rows, 0, function (err) {
                     if (err) return new errors.SqlError(err);
-                    console.log(add.rows);
                     res.render('advertisements/advertisement',
                         {
                             title: "Advertisement",
@@ -147,7 +148,6 @@ var addsController = {
     },
     post: function(req,res) {
         if (!isAuthenticated(req)) {
-            console.log('Nao autenticado!');
             res.render('home/login', {
                 message: 'Necessitas de estar logado para postares Anúncios',
                 success: true,
@@ -161,7 +161,12 @@ var addsController = {
                 city = geo.city;
                 country = geo.country;
             }
-            addsDB.postAdd(req.body.title,req.body.description,req.user.username,country,city,null,function(err){
+            var photo = "";
+            if(req.files.userPhoto === undefined)
+                photo = __dirname.substr(2)+'public/uploads/Default-image.jpg';
+            else
+                photo = req.files.userPhoto.path;
+            addsDB.postAdd(req.body.title,req.body.description,req.user.username,country,city,photo,function(err){
                 if(err) return err;
                 addsDB.getAllAdds(function(err,results){
                     if (err) {
@@ -173,6 +178,35 @@ var addsController = {
         }
 
     }
+}
+
+function resolveFilter(query,currentPage,done){
+    if(query.title != undefined && query.category !== '' && query.city !== '')
+        done('SELECT * FROM advertisement WHERE title=$1 AND category=$2 AND city=$3 ORDER BY publishdate DESC, publishtime DESC LIMIT $4 OFFSET $5',
+                [query.title,query.category,query.city,MAX_ADVERTISEMENTS_PER_PAGE,(currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
+    if(query.title !== undefined && query.title !== ''){
+        if(query.category !== '')
+            done('SELECT * FROM advertisement WHERE title=$1 AND category=$2 ORDER BY publishdate DESC, publishtime DESC LIMIT $3 OFFSET $4',
+                [query.title,query.category,MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
+        else if(query.city !== '')
+            done('SELECT * FROM advertisement WHERE title=$1 AND city=$2 ORDER BY publishdate DESC, publishtime DESC LIMIT $3 OFFSET $4',
+                [query.title,query.city,MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
+        else
+            done('SELECT * FROM advertisement WHERE title=$1 ORDER BY publishdate DESC, publishtime DESC LIMIT $2 OFFSET $3',
+                [query.title,MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
+    }else if(query.category !== undefined && query.category !== ''){
+            if(query.city !== '')
+                done('SELECT * FROM advertisement WHERE category=$1 AND city=$2 ORDER BY publishdate DESC, publishtime DESC LIMIT $3 OFFSET $4',
+                    [query.category,query.city,MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
+            else
+                done('SELECT * FROM advertisement WHERE category=$1 ORDER BY publishdate DESC, publishtime DESC LIMIT $2 OFFSET $3',
+                    [query.category,MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
+    }else if(query.city !== undefined && query.city !== '') {
+        done('SELECT * FROM advertisement WHERE city=$1 ORDER BY publishdate DESC, publishtime DESC LIMIT $2 OFFSET $3',
+            [query.city, MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
+    }else
+        done('SELECT * FROM advertisement ORDER BY publishdate DESC, publishtime DESC LIMIT $1 OFFSET $2',
+            [MAX_ADVERTISEMENTS_PER_PAGE, (currentPage - 1) * MAX_ADVERTISEMENTS_PER_PAGE]);
 }
 
 

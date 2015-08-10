@@ -31,11 +31,12 @@ block content
                           div(class="media-left media-middle")
                               img(class="img-responsive", src= advertisement.pictures, width='800', height='600', alt='Responsive Image')
               div(class='row')
-                  p(class="blog-post-description")= advertisement.description
-              p(class="blog-post-meta") Create at #{advertisement.publishdate} as #{advertisement.publishtime.substring(0,8)}
+                  div(class="col-lg-8")
+                      p(class="blog-post-description")= advertisement.description
+              p(class="blog-post-meta") Criada em #{advertisement.publishdate} às #{advertisement.publishtime.substring(0,8)}
               if(advertisement.city && advertisement.country)
                   p #{advertisement.city}, #{advertisement.country}
-              p Author - #{advertisement.username}
+              p Autor - #{advertisement.username}
           block buttons
           if(advertisement.comments)
               div(id="comments",class="collapse")
