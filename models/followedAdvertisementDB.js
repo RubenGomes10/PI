@@ -1,7 +1,7 @@
 /**
  * Created by Rúben Gomes on 28-07-2015.
  */
-var pgSql  = require('pgSQL.js'), // To access the database
+var pgSql  = require('./pgSQL.js'), // To access the database
     errors = require('../public/javascripts/errors.js');
 
 

@@ -7,8 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var passport = require('passport'); // To authenticate an user
-var pgSql = require('./public/javascripts/pgSQL.js');
-var localStrategy = require('./public/javascripts/psLocalStrategy.js');
+var pgSql = require('./models/pgSQL.js');
+var localStrategy = require('./models/psLocalStrategy.js');
 var errors = require('./public/javascripts/errors.js');
 var routes = require('./routes/index.js');
 
