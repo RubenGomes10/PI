@@ -5,7 +5,8 @@
 var confFile= require('../configDB.js'),
     conString="postgres://"+confFile.username+":"+ confFile.password +"@" +confFile.hostname +":"+confFile.port+"/"+confFile.database,
     pg = require('pg'),
-    _encrypt = require('encrypts.js');
+    _encrypt = require('../public/javascripts/encrypts.js');
+
 
 /* Connect to the dataBase to optain results*/
 module.exports.query = function(queryString,values,callback){

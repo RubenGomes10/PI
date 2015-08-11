@@ -2,7 +2,7 @@
  * Created by Ruben Gomes on 23/07/2015.
  */
 var localStrategy = require('passport-local').Strategy; // Strategy to link database data and authenticate an user
-var encrypt = require('encrypts.js');
+var encrypt = require('../public/javascripts/encrypts.js');
 var pgSql = require('pgSQL.js');
 
 

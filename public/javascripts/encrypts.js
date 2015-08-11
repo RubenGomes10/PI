@@ -21,6 +21,6 @@ var encrypt = {
             callback(err, res);
         });
     }
-}
+};
 
 module.exports = encrypt;
