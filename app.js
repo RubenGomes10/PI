@@ -15,8 +15,8 @@ var routes = require('./routes/index.js');
 
 var app = express();
 
-var test = require('./public/javascripts/tests/inserts.js');
-test.test();
+//var test = require('./public/javascripts/tests/inserts.js');
+//test.test();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
