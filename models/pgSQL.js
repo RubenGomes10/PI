@@ -5,7 +5,7 @@
 var conString,//= "pi://postgres:qwerty@localhost:5432/postgres", //change by the prop file
     confFile= require('../configDB.js'), //you must create a config file like that and put it at git ignore
     pg = require('pg'),
-    encrypt = require('encrypt.js');
+    encrypt = require('encrypt');
     //errors = require('./errors');
     conString="pi://"+confFile.username+":"+ confFile.password +"@" +confFile.hostname +":"+confFile.port+"/"+confFile.database;
     console.log(conString);
