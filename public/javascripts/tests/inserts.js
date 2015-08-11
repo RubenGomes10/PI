@@ -1,4 +1,4 @@
-var pgSql = require('../../../models/pgSQL.js'), // To access the database
+var pgSql = require('../pgSQL.js'), // To access the database
     errors = require('../errors.js');
 
 

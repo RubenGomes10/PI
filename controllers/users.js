@@ -3,7 +3,7 @@
  */
 var usersDB = require('../models/usersDB'),
     encrypt = require('../public/javascripts/encrypts.js'),
-    pgSql   = require('../models/pgSQL.js'), // To access the database
+    pgSql   = require('../public/javascripts/pgSQL.js'), // To access the database
     errors  = require('../public/javascripts/errors.js');
 
 var usersController = {
