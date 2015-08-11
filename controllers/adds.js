@@ -2,12 +2,12 @@
  * Created by Ruben Gomes on 26/07/2015.
  */
 
-var pgSql       = require('../models/pgSQL'), // To access the database
-    errors      = require('../public/javascripts/errors'),
+var pgSql       = require('../models/pgSQL.js'), // To access the database
+    errors      = require('../public/javascripts/errors.js'),
     geoip       = require('geoip-lite'),
-    addsDB      = require('../models/advertisementsDB'),
-    followersDB = require('../models/followedAdvertisementDB'),
-    commentsDB  = require('../models/commentsDB'),
+    addsDB      = require('../models/advertisementsDB.js'),
+    followersDB = require('../models/followedAdvertisementDB.js'),
+    commentsDB  = require('../models/commentsDB.js'),
     MAX_ADVERTISEMENTS_PER_PAGE = 10;
 
 var addsController = {

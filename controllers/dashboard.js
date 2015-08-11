@@ -1,8 +1,8 @@
 /**
  * Created by Ruben Gomes on 26/07/2015.
  */
-var pgSql  = require('../models/pgSQL'), // To access the database
-    errors = require('../public/javascripts/errors');
+var pgSql  = require('../models/pgSQL.js'), // To access the database
+    errors = require('../public/javascripts/errors.js');
 
 
 var dashboardController = {

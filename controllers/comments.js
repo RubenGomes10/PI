@@ -1,9 +1,9 @@
 /**
  * Created by Ruben Gomes on 26/07/2015.
  */
-var commentDB  = require('../models/commentsDB'),
-    followedDB = require('../models/followedAdvertisementDB'),
-    errors     = require('../public/javascripts/errors');
+var commentDB  = require('../models/commentsDB.js'),
+    followedDB = require('../models/followedAdvertisementDB.js'),
+    errors     = require('../public/javascripts/errors.js');
 
 
 var commentsController = {

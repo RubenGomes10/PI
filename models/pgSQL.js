@@ -5,7 +5,7 @@
 var conString,//= "pi://postgres:qwerty@localhost:5432/postgres", //change by the prop file
     confFile= require('../configDB.js'), //you must create a config file like that and put it at git ignore
     pg = require('pg'),
-    encrypt = require('encrypt');
+    _encrypt = require('encrypt.js');
     //errors = require('./errors');
     conString="pi://"+confFile.username+":"+ confFile.password +"@" +confFile.hostname +":"+confFile.port+"/"+confFile.database;
     console.log(conString);
@@ -65,9 +65,9 @@ module.exports.update = function(table, values, callback){
 
 /*insert user */
 module.exports.insertUser = function(username, password,email, firstname, lastname, question, response, callback){
-    encrypt.hash(password, function(err, hash){
+    _encrypt.hash(password, function(err, hash){
         if(err) { callback(err); return; }
-        encrypt.hash(response, function(err, hash2){
+        _encrypt.hash(response, function(err, hash2){
             if(err) { callback(err); return; }
             module.exports.insert('_user', {username: username, password: hash, email: email, firstname: firstname, lastname: lastname,
                 question: question, response: hash2}, callback);
