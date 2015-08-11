@@ -1,5 +1,5 @@
-var pgSql = require('../../../models/pgSQL'), // To access the database
-    errors = require('../errors');
+var pgSql = require('../../../models/pgSQL.js'), // To access the database
+    errors = require('../errors.js');
 
 
 function deleteAll(callback) {
